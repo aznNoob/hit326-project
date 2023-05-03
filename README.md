@@ -1,1 +1,1 @@
-# hit326-project
+# Northern Australian Times
