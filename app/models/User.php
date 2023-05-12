@@ -21,4 +21,16 @@ class User
             return false;
         }
     }
+
+    public function findUserByEmail($email)
+    {
+        $this->db->query('SELECT * from users WHERE email = :email');
+        $this->db->bind(':email', $email);
+        $row = $this->db->resultSingle();
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
