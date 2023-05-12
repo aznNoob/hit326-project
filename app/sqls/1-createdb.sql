@@ -1,0 +1,1 @@
+CREATE DATABASE northern_australian_times_db;
