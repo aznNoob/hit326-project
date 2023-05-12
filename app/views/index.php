@@ -1,3 +1,5 @@
-<?php
+<?php require APPROOT . '/views/includes/header.php'; ?>
 
-echo "test";
+Test
+
+<?php require APPROOT . '/views/includes/footer.php'; ?>
