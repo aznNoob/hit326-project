@@ -6,6 +6,7 @@
 
 class Core
 {
+    // Initalise controller, method and parameters with default values
     protected $currentController = 'Pages';
     protected $currentMethod = 'index';
     protected $parameters = [];

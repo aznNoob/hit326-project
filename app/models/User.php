@@ -6,9 +6,11 @@ class User
 
     public function __construct()
     {
+        // Instantiate the database base model to get needed properties and methods
         $this->db = new Database;
     }
 
+    // Insert the register data into the database
     public function register($data)
     {
         $this->db->query('INSERT INTO users(name, email, password) VALUES(:name, :email, :password)');
@@ -22,6 +24,7 @@ class User
         }
     }
 
+    // See if email is existing already in database
     public function findUserByEmail($email)
     {
         $this->db->query('SELECT * from users WHERE email = :email');

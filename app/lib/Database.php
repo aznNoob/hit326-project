@@ -9,6 +9,7 @@
 
 class Database
 {
+    // Properties needed for database connection (Constant values in app/config/config.php)
     private $host = DB_HOST;
     private $username = DB_USERNAME;
     private $password = DB_PASSWORD;
@@ -77,7 +78,7 @@ class Database
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    // Get single object record 
+    // Get single object record as object
     public function resultSingle()
     {
         $this->execute();

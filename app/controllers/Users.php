@@ -10,6 +10,7 @@ class Users extends Controller
     }
 
     // Methods
+
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -34,9 +35,9 @@ class Users extends Controller
 
     // Helper Methods
 
+    // Initialise the data needed for view
     private function initUserData()
     {
-        // Initialise the data needed for view
         return [
             'name' => '',
             'email' => '',
@@ -50,6 +51,7 @@ class Users extends Controller
     }
 
 
+    // Sanitise and validate the registration data
     private function validateRegistrationData($data)
     {
         // Sanitise the POST input
@@ -94,9 +96,9 @@ class Users extends Controller
         return $data;
     }
 
+    // Check if there are any input errors
     private function noErrorsCheck($data)
     {
-        // Check if there are any input errors
         return (empty($data['name_error']) &&
             empty($data['email_error']) &&
             empty($data['password_error']) &&
