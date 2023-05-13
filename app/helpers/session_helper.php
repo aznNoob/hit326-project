@@ -10,3 +10,8 @@ function checkLoggedIn()
 {
     return isset($_SESSION['user_id']) ? true : false;
 }
+
+function userHasRole($role)
+{
+    return (isset($_SESSION['user_role']) && $_SESSION['user_role'] == $role);
+}
