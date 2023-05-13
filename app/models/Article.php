@@ -15,4 +15,17 @@ class Article
         $articleResults = $this->db->resultSet();
         return $articleResults;
     }
+
+    public function addArticle($data)
+    {
+        $this->db->query('INSERT INTO posts(user_id, title, body) VALUES(:user_id, :title, :body)');
+        $this->db->bind(':user_id', $data['user_id']);
+        $this->db->bind(':title', $data['title']);
+        $this->db->bind(':body', $data['body']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
