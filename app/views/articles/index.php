@@ -1,29 +1,40 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row mb-3">
+        <div class="col-10">
             <h1>Articles</h1>
         </div>
-        <div class="col-md-6">
-            <a href="<?php echo URLROOT; ?>/articles/add" class="btn btn-primary pull-right">
-                <i class="fa fa-plus"></i> New Article
+        <div class="col-2">
+            <a href="<?php echo URLROOT; ?>/articles/add">
+                <button class="btn btn-primary pull-right btn-new-article"><i class="fa fa-plus mx-1"></i>New Article</button>
             </a>
         </div>
     </div>
-    <article>
+    <div class="row">
         <?php foreach ($data['articles'] as $article) : ?>
-            <div class="card card-body mb-3">
-                <h4 class="card-title"><?php echo $article->title ?></h4>
-                <div class="bg-light p-2 mb-3">
-                    Written by <?php echo $article->name ?> on <?php echo $article->created_at ?>
+            <article class="col-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="<?php echo URLROOT ?>\img\card-img.svg" alt="Card Image">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <?php echo $article->title ?>
+                        </h3>
+                        <span class="card-subtitle">
+                            By <?php echo $article->name ?>
+                        </span>
+                        <div class="card-text">
+                            <?php echo substr($article->body, 0, 100) ?>...
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <?php echo date("d F Y", strtotime($article->created_at)) ?>
+                    </div>
+                    <a href="<?php echo URLROOT; ?>/articles/show/<?php echo $article->id ?>" class="stretched-link"></a>
                 </div>
-                <p class="card-text">
-                    <?php echo $article->body ?>
-                </p>
-                <a href="<?php echo URLROOT; ?>/articles/show/<?php echo $article->id ?>" class="btn btn-dark">More</a>
-            </div>
+            </article>
         <?php endforeach ?>
-    </article>
+    </div>
 </div>
+
 <?php require APPROOT . '/views/includes/footer.php'; ?>
