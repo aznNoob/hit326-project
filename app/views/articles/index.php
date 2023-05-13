@@ -2,10 +2,10 @@
 
 <div class="container">
     <div class="row mb-3">
-        <div class="col-10">
+        <div class="col-md-9 col-lg-10">
             <h1>Articles</h1>
         </div>
-        <div class="col-2">
+        <div class="col-md-3 col-lg-2">
             <a href="<?php echo URLROOT; ?>/articles/add">
                 <button class="btn btn-primary pull-right btn-new-article"><i class="fa fa-plus mx-1"></i>New Article</button>
             </a>
@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <?php foreach ($data['articles'] as $article) : ?>
-            <article class="col-4 mb-4">
+            <article class="col-md-6 col-lg-4 mb-4">
                 <div class="card">
                     <img class="card-img-top" src="<?php echo URLROOT ?>\img\card-img.svg" alt="Card Image">
                     <div class="card-body">
