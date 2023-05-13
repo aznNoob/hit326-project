@@ -11,10 +11,10 @@
                     <a class="nav-link mx-2" href="<?php echo URLROOT; ?>"><i class="fa-solid fa-house-chimney mx-2"></i>Home</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about"><i class="fa-solid fa-circle-info mx-2"></i>About</a>
+                    <a class="nav-link" href="<?php echo URLROOT; ?>/articles/"><i class="fa-solid fa-newspaper mx-2"></i>Articles</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>/articles/"><i class="fa-solid fa-newspaper mx-2"></i>Articles</a>
+                    <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about"><i class="fa-solid fa-circle-info mx-2"></i>About</a>
                 </li>
                 <?php if (isset($_SESSION['user_id'])) : ?>
                     <li class="nav-item dropdown mx-2">
