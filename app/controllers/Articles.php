@@ -6,10 +6,16 @@ class Articles extends Controller
 
     public function __construct()
     {
-        $this->articleModel;
+        $this->articleModel = $this->model('Article');
     }
 
     public function index()
     {
+        $articles = $this->articleModel->getArticles();
+        $data = [
+            'articles' => $articles
+        ];
+
+        return $this->view('articles/index', $data);
     }
 }
