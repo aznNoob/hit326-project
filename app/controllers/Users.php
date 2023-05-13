@@ -11,8 +11,13 @@ class Users extends Controller
 
     // Main Methods
 
+    // Register method
     public function register()
     {
+        if (checkLoggedIn()) {
+            redirectURL('pages/index');
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $this->initUserData();
             $data = $this->validateRegistrationData($data);
@@ -32,8 +37,13 @@ class Users extends Controller
         $this->view('users/register', $data);
     }
 
+    // Login method
     public function login()
     {
+        if (checkLoggedIn()) {
+            redirectURL('pages/index');
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $this->initLoginData();
             $data = $this->validateLoginData($data);
@@ -55,6 +65,7 @@ class Users extends Controller
         }
     }
 
+    // Create session method
     public function createUserSession($user)
     {
         $_SESSION['user_id'] = $user->id;
@@ -64,10 +75,11 @@ class Users extends Controller
         redirectURL('pages/index');
     }
 
+    // Logout method
     public function logout()
     {
-        $session_vars = ['user_id', 'user_email', 'user_name', 'user_role'];
-        foreach ($session_vars as $var) {
+        $session_variables = ['user_id', 'user_email', 'user_name', 'user_role'];
+        foreach ($session_variables as $var) {
             unset($_SESSION[$var]);
         }
         session_destroy();
