@@ -26,7 +26,7 @@
                             By <?php echo $article->name ?>
                         </span>
                         <div class="card-text">
-                            <?php echo substr($article->body, 0, 100) ?>...
+                            <?php echo substr($article->body, 0, 100) ?>
                         </div>
                     </div>
                     <div class="card-footer">
