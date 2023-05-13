@@ -25,7 +25,7 @@ class Users extends Controller
             if ($this->noErrorsCheck($data)) {
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
                 if ($this->userModel->register($data)) {
-                    redirectURL('pages/index');
+                    redirectURL('users/login');
                 } else {
                     die('An error has occurred.');
                 }

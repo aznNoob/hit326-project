@@ -29,10 +29,10 @@ class User
     {
         $this->db->query('SELECT * FROM users WHERE email = :email');
         $this->db->bind(':email', $email);
-        $row = $this->db->resultSingle();
-        $hashed_password = $row->password;
+        $userRow = $this->db->resultSingle();
+        $hashed_password = $userRow->password;
         if (password_verify($password, $hashed_password)) {
-            return $row;
+            return $userRow;
         } else {
             return false;
         }
