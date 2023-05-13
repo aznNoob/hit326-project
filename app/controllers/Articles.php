@@ -22,7 +22,6 @@ class Articles extends Controller
     public function create()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $data = $this->initArticleData();
             $this->validateArticleData($data);
 
@@ -43,9 +42,18 @@ class Articles extends Controller
 
     private function initArticleData()
     {
+        if (!empty($_POST)) {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $title = $_POST['title'] ?? '';
+            $body = $_POST['body'] ?? '';
+        } else {
+            $title = '';
+            $body = '';
+        }
+
         return [
-            'title' => trim($_POST['title']) ?? '',
-            'body' => trim($_POST['body']) ?? '',
+            'title' => $title,
+            'body' => $body,
             'user_id' => $_SESSION['user_id'],
             'title_error' => '',
             'body_error' => '',
