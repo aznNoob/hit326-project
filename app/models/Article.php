@@ -16,7 +16,7 @@ class Article
         return $articleResults;
     }
 
-    public function addArticle($data)
+    public function createArticle($data)
     {
         $this->db->query('INSERT INTO articles(user_id, title, body) VALUES(:user_id, :title, :body)');
         $this->db->bind(':user_id', $data['user_id']);

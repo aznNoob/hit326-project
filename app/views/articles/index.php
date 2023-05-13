@@ -7,7 +7,7 @@
         </div>
         <?php if (userHasRole('journalist') || userHasRole('editor')) : ?>
             <div class="col-md-3 col-lg-2">
-                <a href="<?php echo URLROOT; ?>/articles/add">
+                <a href="<?php echo URLROOT; ?>/articles/create">
                     <button class="btn btn-primary pull-right btn-new-article"><i class="fa fa-plus mx-1"></i>New Article</button>
                 </a>
             </div>
@@ -17,7 +17,7 @@
         <?php foreach ($data['articles'] as $article) : ?>
             <article class="col-md-6 col-lg-4 mb-4">
                 <div class="card article">
-                    <img class="card-img-top" src="<?php echo URLROOT ?>\img\card-img.svg" alt="Card Image">
+                    <img class="card-img-top" src="<?php echo URLROOT ?>/img/card-img.svg" alt="Card Image">
                     <div class="card-body">
                         <h3 class="card-title">
                             <?php echo $article->title ?>
