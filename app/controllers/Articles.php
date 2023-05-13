@@ -21,6 +21,10 @@ class Articles extends Controller
 
     public function create()
     {
+        if ((!userHasRole('journalist')) && (!userHasRole('editor'))) {
+            redirectURL('articles/index');
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $this->initArticleData();
             $this->validateArticleData($data);
