@@ -1,4 +1,5 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
+
 <div class="container">
     <div class="row">
         <div class="col-md-6 mx-auto">
