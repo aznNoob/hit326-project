@@ -17,8 +17,15 @@
                     <a class="nav-link" href="<?php echo URLROOT; ?>/articles/"><i class="fa-solid fa-newspaper mx-2"></i>Articles</a>
                 </li>
                 <?php if (isset($_SESSION['user_id'])) : ?>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout"><i class="fa-solid fa-right-to-bracket mx-2"></i>Logout</a>
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropDown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa-solid fa-user mx-2"></i><?php echo $_SESSION['user_name'] ?>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-address-card mx-2"></i>Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="<?php echo URLROOT; ?>/users/logout"><i class="fa-solid fa-right-to-bracket mx-2"></i>Logout</a>
+                        </div>
                     </li>
                 <?php else : ?>
                     <li class="nav-item mx-2">
