@@ -24,6 +24,20 @@ class User
         }
     }
 
+    //Gets login parameters from controller, checks if email/password matches and if correct, grabs user data
+    public function login($email, $password)
+    {
+        $this->db->query('SELECT * FROM users WHERE email = :email');
+        $this->db->bind(':email', $email);
+        $row = $this->db->resultSingle();
+        $hashed_password = $row->password;
+        if (password_verify($password, $hashed_password)) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
     // See if email is existing already in database
     public function findUserByEmail($email)
     {
