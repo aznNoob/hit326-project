@@ -32,7 +32,7 @@
                     <div class="card-footer">
                         <?php echo date("d F Y", strtotime($article->created_at)) ?>
                     </div>
-                    <a href="<?php echo URLROOT; ?>/articles/show/<?php echo $article->id ?>" class="stretched-link"></a>
+                    <a href="<?php echo URLROOT; ?>/articles/display/<?php echo $article->id ?>" class="stretched-link"></a>
                 </div>
             </article>
         <?php endforeach ?>

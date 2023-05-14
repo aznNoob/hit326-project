@@ -18,7 +18,7 @@ class Article
 
     public function getArticleById($id)
     {
-        $this->db->query('SELECT * FROM articles WHERE id = :id');
+        $this->db->query('SELECT *, users.name AS user_name FROM articles, users WHERE articles.id = :id AND articles.user_id = users.id');
         $this->db->bind(':id', $id);
         $row = $this->db->resultSingle();
         return $row;

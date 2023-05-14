@@ -50,7 +50,7 @@ class Articles extends Controller
             $data = [
                 'articles' => $article
             ];
-            $this->view('articles/show', $data);
+            $this->view('articles/display', $data);
         }
     }
 
