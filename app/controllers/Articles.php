@@ -27,7 +27,7 @@ class Articles extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $this->initArticleData();
-            $this->validateArticleData($data);
+            $data = $this->validateArticleData($data);
 
             if (empty($data['title_error']) && empty($data['body_error'])) {
                 if ($this->articleModel->createArticle($data)) {
@@ -41,6 +41,16 @@ class Articles extends Controller
         } else {
             $data = $this->initArticleData();
             $this->view('articles/create', $data);
+        }
+    }
+
+    public function display($id)
+    { {
+            $article = $this->articleModel->getArticleById($id);
+            $data = [
+                'articles' => $article
+            ];
+            $this->view('articles/show', $data);
         }
     }
 
@@ -64,7 +74,7 @@ class Articles extends Controller
         ];
     }
 
-    private function validateArticleData(&$data)
+    private function validateArticleData($data)
     {
         if (empty($data['title'])) {
             $data['title_error'] = 'Please enter a title';
@@ -73,5 +83,7 @@ class Articles extends Controller
         if (empty($data['body'])) {
             $data['body_error'] = 'Please enter a body message';
         }
+
+        return $data;
     }
 }

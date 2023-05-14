@@ -16,6 +16,14 @@ class Article
         return $articleResults;
     }
 
+    public function getArticleById($id)
+    {
+        $this->db->query('SELECT * FROM articles WHERE id = :id');
+        $this->db->bind(':id', $id);
+        $row = $this->db->resultSingle();
+        return $row;
+    }
+
     public function createArticle($data)
     {
         $this->db->query('INSERT INTO articles(user_id, title, body) VALUES(:user_id, :title, :body)');
