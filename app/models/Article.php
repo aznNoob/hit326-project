@@ -16,6 +16,14 @@ class Article
         return $articleResults;
     }
 
+    public function getSixLatestArticles()
+    { {
+            $this->db->query('SELECT articles.id, articles.title, articles.created_at, users.name AS user_name FROM articles, users WHERE articles.user_id = users.id ORDER BY articles.created_at DESC LIMIT 6;');
+            $articleResults = $this->db->resultSet();
+            return $articleResults;
+        }
+    }
+
     public function getArticleById($id)
     {
         $this->db->query('SELECT *, users.name AS user_name FROM articles, users WHERE articles.id = :id AND articles.user_id = users.id');
