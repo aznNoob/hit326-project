@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
 
-<div class="bg-light p-5">
+<div class="p-5">
     <div class="container">
         <h1 class="display-5 fw-bold">Welcome!</h2>
             <p class="fs-4">Northern Australian Times is a premier news website dedicated to delivering the latest news, stories, and updates from across Northern Australia.
