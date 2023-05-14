@@ -116,8 +116,8 @@ class Users extends Controller
         // Trim and store sanitized input
         $data['name'] = trim($_POST['name']);
         $data['email'] = trim($_POST['email']);
-        $data['password'] = trim($_POST['password']);
-        $data['confirm_password'] = trim($_POST['confirm_password']);
+        $data['password'] = $_POST['password'];
+        $data['confirm_password'] = $_POST['confirm_password'];
 
         // Validation logic
         // Check if empty name input
@@ -178,8 +178,8 @@ class Users extends Controller
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        $data['email'] = trim($_POST['email']);
-        $data['password'] = trim($_POST['password']);
+        $data['email'] = $_POST['email'];
+        $data['password'] = $_POST['password'];
 
         if (empty($data['email']) || empty($data['password'])) {
             $data['login_error'] = 'Please enter both email and password to login';
