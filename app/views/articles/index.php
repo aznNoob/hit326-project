@@ -22,15 +22,15 @@
                         <h3 class="card-title">
                             <?php echo $article->title ?>
                         </h3>
-                        <span class="card-subtitle">
-                            By <?php echo $article->name ?>
+                        <span class="card-subtitle text-secondary">
+                            By <?php echo $article->name ?> - <?php echo displayDate(($article->created_at)) ?>
                         </span>
-                        <div class="card-text">
-                            <?php echo substr($article->body, 0, 100) ?>
+                        <div class="card-text mt-2">
+                            <?php echo substr($article->body, 0, 200) ?>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <?php echo displayDate(($article->created_at)) ?>
+                        <p>Tags</p>
                     </div>
                     <a href="<?php echo URLROOT; ?>/articles/display/<?php echo $article->id ?>" class="stretched-link"></a>
                 </div>
