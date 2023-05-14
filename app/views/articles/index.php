@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <?php echo date("d F Y", strtotime($article->created_at)) ?>
+                        <?php echo displayDate(($article->created_at)) ?>
                     </div>
                     <a href="<?php echo URLROOT; ?>/articles/display/<?php echo $article->id ?>" class="stretched-link"></a>
                 </div>
