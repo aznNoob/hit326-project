@@ -23,14 +23,15 @@ class Articles extends Controller
     {
         if ((!userHasRole('journalist')) && (!userHasRole('editor'))) {
             redirectURL('articles/index');
+            exit();
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $this->initArticleData();
             $data = $this->validateArticleData($data);
 
-            if (empty($data['title_error']) && empty($data['body_error'])) {
-                if ($this->articleModel->createArticle($data)) {
+            if (empty($data['title_error']) && empty($data['body_error']) && empty($data['tags_error'])) {
+                if ($article_id = $this->articleModel->createArticle($data)) {
                     redirectURL('articles/index');
                 } else {
                     die('An error has occurred');
@@ -60,17 +61,21 @@ class Articles extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $title = $_POST['title'] ?? '';
             $body = $_POST['body'] ?? '';
+            $tags = $_POST['tags'] ?? '';
         } else {
             $title = '';
             $body = '';
+            $tags = '';
         }
 
         return [
             'title' => $title,
             'body' => $body,
+            'tags' => $tags,
             'user_id' => $_SESSION['user_id'],
             'title_error' => '',
             'body_error' => '',
+            'tags_error' => ''
         ];
     }
 
@@ -82,6 +87,10 @@ class Articles extends Controller
 
         if (empty($data['body'])) {
             $data['body_error'] = 'Please enter a body message';
+        }
+
+        if (empty($data['tags'])) {
+            $data['tags_error'] = 'Please add at least one tag';
         }
 
         return $data;

@@ -71,6 +71,12 @@ class Database
         return $this->stmt->execute();
     }
 
+    // Get the ID of last insert object 
+    public function lastInsertId()
+    {
+        return $this->dbh->lastInsertId();
+    }
+
     // Get result set as an array of objects
     public function resultSet()
     {

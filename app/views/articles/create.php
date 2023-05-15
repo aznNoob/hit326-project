@@ -9,17 +9,22 @@
                 <form action="<?php echo URLROOT; ?>/articles/create" method="POST">
                     <div class="form-group mb-2">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" name="title" value="<?php echo $data['title'] ?>" class="form-control <?php echo (!empty($data['title_error'])) ? 'is-invalid' : ''; ?>">
+                        <input id="title" type="text" name="title" value="<?php echo $data['title'] ?>" class="form-control <?php echo (!empty($data['title_error'])) ? 'is-invalid' : ''; ?>">
                         <?php if (!empty($data['title_error'])) : ?><span class="invalid-feedback"><?php echo $data['title_error'] ?></span>
                         <?php endif ?>
                     </div>
                     <div class="form-group mb-2">
                         <label for="body" class="form-label">Content</label>
-                        <textarea name="body" class="form-control <?php echo (!empty($data['body_error'])) ? 'is-invalid' : ''; ?>" rows="5"><?php echo $data['body'] ?></textarea>
+                        <textarea id="body" name="body" class="form-control <?php echo (!empty($data['body_error'])) ? 'is-invalid' : ''; ?>" rows="5"><?php echo $data['body'] ?></textarea>
                         <?php if (!empty($data['body_error'])) : ?><span class="invalid-feedback"><?php echo $data['body_error'] ?></span>
                         <?php endif ?>
                     </div>
-
+                    <div>
+                        <label for="tags" class="form-label">Tags</label>
+                        <input id="tags" name="tags" value="<?php echo $data['tags'] ?>" class="form-control <?php echo (!empty($data['tags_error'])) ? 'is-invalid' : ''; ?>">
+                        <?php if (!empty($data['tags_error'])) : ?><span class="invalid-feedback"><?php echo $data['tags_error'] ?></span>
+                        <?php endif ?>
+                    </div>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center mt-2">
                             <input type="submit" value="Submit" class="btn btn-success btn-block">

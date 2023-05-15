@@ -39,7 +39,7 @@ class Article
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':body', $data['body']);
         if ($this->db->execute()) {
-            return true;
+            return $this->db->lastInsertId();
         } else {
             return false;
         }
