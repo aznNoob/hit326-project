@@ -10,6 +10,11 @@
     <div class="row">
         <p><?php echo $data['articles']->body ?></p>
     </div>
+    <hr class="hr">
+    </hr>
+    <div class="row">
+        <h2>Recommended Posts</h2>
+    </div>
 </div>
 
 <?php require APPROOT . '/views/includes/footer.php'; ?>

@@ -30,7 +30,11 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <p>Tags</p>
+                        <?php foreach ($article->tags as $tag) : ?>
+                            <a href="#" class="badge bg-secondary">
+                                <?php echo $tag->tag_name; ?>
+                            </a>
+                        <?php endforeach; ?>
                     </div>
                     <a href="<?php echo URLROOT; ?>/articles/display/<?php echo $article->id ?>" class="stretched-link"></a>
                 </div>

@@ -16,6 +16,7 @@ class Users extends Controller
     {
         if (checkLoggedIn()) {
             redirectURL('pages/index');
+            exit();
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -42,6 +43,7 @@ class Users extends Controller
     {
         if (checkLoggedIn()) {
             redirectURL('pages/index');
+            exit();
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
