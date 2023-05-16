@@ -21,7 +21,7 @@
                     </div>
                     <div>
                         <label for="tags" class="form-label">Tags</label>
-                        <input id="tags" name="tags" value="<?php echo $data['tags'] ?>" class="form-control <?php echo (!empty($data['tags_error'])) ? 'is-invalid' : ''; ?>">
+                        <input id="tags" name="tags" value='<?php echo $data['tags'] ?>' class="form-control <?php echo (!empty($data['tags_error'])) ? 'is-invalid' : ''; ?>">
                         <?php if (!empty($data['tags_error'])) : ?><span class="invalid-feedback"><?php echo $data['tags_error'] ?></span>
                         <?php endif ?>
                     </div>

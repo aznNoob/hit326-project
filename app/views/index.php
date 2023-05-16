@@ -22,8 +22,9 @@
                             <a href="<?php echo URLROOT; ?>/articles/display/<?php echo $article->id ?>">
                                 <img class="rounded" src="<?php echo URLROOT ?>/img/card-img.svg" alt="Image">
                             </a>
+
                             <a class="article-title" href="<?php echo URLROOT; ?>/articles/display/<?php echo $article->id ?>">
-                                <h3 class="mb-2 mt-3">
+                                <h3 class="mb-2 mt-2">
                                     <?php echo $article->title ?>
                                 </h3>
                             </a>
@@ -32,6 +33,11 @@
                                 <span>-</span>
                                 <span><?php echo displayDate(($article->created_at)) ?></span>
                             </div>
+                            <?php foreach ($article->tags as $tag) : ?>
+                                <a href="#" class="badge bg-secondary mt-1">
+                                    <?php echo $tag->tag_name; ?>
+                                </a>
+                            <?php endforeach; ?>
                         </div>
                     </article>
                 <?php endforeach ?>

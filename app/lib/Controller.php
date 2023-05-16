@@ -1,7 +1,7 @@
 <?php
 
 /* Base Controller
- * Loads the  models and views
+** Loads the models and views
 */
 
 class Controller
@@ -15,7 +15,16 @@ class Controller
         return new $model();
     }
 
-    // Render the view
+    // Load the controller
+    public function controller($controller)
+    {
+        require_once '../app/controllers/' . $controller . '.php';
+
+        //Instantiate controller
+        return new $controller();
+    }
+
+    // Render the view with optional data
     public function view($view, $data = [])
     {
         if (file_exists('../app/views/' . $view . '.php')) {

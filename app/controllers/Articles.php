@@ -3,19 +3,26 @@
 class Articles extends Controller
 {
     private $articleModel;
+    private $tagsController;
+    private $tagModel;
 
     public function __construct()
     {
         $this->articleModel = $this->model('Article');
+        $this->tagsController = $this->controller('Tags');
+        $this->tagModel = $this->model('Tag');
     }
 
     public function index()
     {
         $articles = $this->articleModel->getArticles();
+        foreach ($articles as $article) {
+            $tags = $this->tagModel->getTagsOfArticle($article->id);
+            $article->tags = $tags;
+        }
         $data = [
             'articles' => $articles
         ];
-
         return $this->view('articles/index', $data);
     }
 
@@ -32,6 +39,7 @@ class Articles extends Controller
 
             if (empty($data['title_error']) && empty($data['body_error']) && empty($data['tags_error'])) {
                 if ($article_id = $this->articleModel->createArticle($data)) {
+                    $this->tagsController->mapTags($article_id, $data['tags']);
                     redirectURL('articles/index');
                 } else {
                     die('An error has occurred');
@@ -48,8 +56,10 @@ class Articles extends Controller
     public function display($id)
     { {
             $article = $this->articleModel->getArticleById($id);
+            $tag = $this->tagModel->getTagsOfArticle($id);
             $data = [
-                'articles' => $article
+                'articles' => $article,
+                'tags' => $tag
             ];
             $this->view('articles/display', $data);
         }
