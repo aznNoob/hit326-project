@@ -25,6 +25,6 @@ img {
     text-decoration: none;
 }
 
-a {
-    text-decoration: none !important;
+.badge:hover {
+    color: black;
 }

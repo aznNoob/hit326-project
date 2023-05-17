@@ -31,15 +31,19 @@ class Article
         }
     }
 
-    public function getArticleById($id)
+    public function getArticleById($data)
     {
         $this->db->query('SELECT articles.*, users.name AS user_name 
                         FROM articles
                         JOIN users ON articles.user_id = users.id
                         WHERE articles.id = :article_id;');
-        $this->db->bind(':article_id', $id);
+        $this->db->bind(':article_id', $data);
         $row = $this->db->resultSingle();
         return $row;
+    }
+
+    public function getRelatedArticles($data)
+    {
     }
 
     public function createArticle($data)
