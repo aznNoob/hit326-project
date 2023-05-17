@@ -57,15 +57,25 @@ class Articles extends Controller
     {
         $article = $this->articleModel->getArticleById($id);
         $tags = $this->tagModel->getTagsOfArticle($article->id);
+        $relatedArticles = $this->generateRelatedArticles($id);
         $article->tags = $tags;
         $data = [
-            'articles' => $article
+            'article' => $article,
+            'related_articles' => $relatedArticles
         ];
         $this->view('articles/display', $data);
     }
 
     private function generateRelatedArticles($id)
     {
+        $tags = $this->tagModel->getTagsOfArticle($id);
+        $relatedArticles = array();
+        foreach ($tags as $tag) {
+            $articles = $this->articleModel->getRelatedArticles($tag->id, $id);
+            $relatedArticles = array_merge($relatedArticles, $articles);
+        }
+        $relatedArticles = array_unique($relatedArticles, SORT_REGULAR);
+        return $relatedArticles;
     }
 
     private function initArticleData()

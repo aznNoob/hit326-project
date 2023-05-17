@@ -42,8 +42,19 @@ class Article
         return $row;
     }
 
-    public function getRelatedArticles($data)
+    public function getRelatedArticles($tag, $article)
     {
+        $this->db->query('SELECT articles.id, articles.title
+                        FROM articles
+                        JOIN mapping_articles_tags ON articles.id = mapping_articles_tags.article_id
+                        JOIN tags ON tags.id = mapping_articles_tags.tag_id
+                        WHERE mapping_articles_tags.tag_id = :tag_id
+                        AND articles.id != :current_article_id;
+                        ORDER BY articles.created_at DESC');
+        $this->db->bind(':tag_id', $tag);
+        $this->db->bind('current_article_id', $article);
+        $row = $this->db->resultSet();
+        return $row;
     }
 
     public function createArticle($data)

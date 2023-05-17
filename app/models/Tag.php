@@ -53,7 +53,7 @@ class Tag
 
     public function getTagsOfArticle($id)
     {
-        $this->db->query('SELECT tags.tag AS tag_name 
+        $this->db->query('SELECT tags.id, tags.tag AS tag_name 
                         FROM mapping_articles_tags 
                         JOIN tags ON mapping_articles_tags.tag_id = tags.id
                         WHERE mapping_articles_tags.article_id = :articles_id');
