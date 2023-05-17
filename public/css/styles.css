@@ -24,3 +24,7 @@ img {
 .badge {
     text-decoration: none;
 }
+
+a {
+    text-decoration: none !important;
+}

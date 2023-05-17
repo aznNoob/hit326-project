@@ -31,7 +31,7 @@
                     </div>
                     <div class="card-footer">
                         <?php foreach ($article->tags as $tag) : ?>
-                            <a href="#" class="badge bg-secondary">
+                            <a herf="#" class="badge bg-secondary">
                                 <?php echo $tag->tag_name; ?>
                             </a>
                         <?php endforeach; ?>

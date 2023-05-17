@@ -56,10 +56,10 @@ class Articles extends Controller
     public function display($id)
     { {
             $article = $this->articleModel->getArticleById($id);
-            $tag = $this->tagModel->getTagsOfArticle($id);
+            $tags = $this->tagModel->getTagsOfArticle($article->id);
+            $article->tags = $tags;
             $data = [
-                'articles' => $article,
-                'tags' => $tag
+                'articles' => $article
             ];
             $this->view('articles/display', $data);
         }
