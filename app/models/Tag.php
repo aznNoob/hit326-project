@@ -68,4 +68,15 @@ class Tag
         $this->db->bind(':tag_name', $data);
         return $this->db->resultSingle();
     }
+
+    public function deleteTagToArticle($data)
+    {
+        $this->db->query("DELETE FROM mapping_articles_tags WHERE article_id = :id");
+        $this->db->bind(':id', $data);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
