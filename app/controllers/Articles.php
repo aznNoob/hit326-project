@@ -36,7 +36,6 @@ class Articles extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $this->initArticleData();
             $data = $this->validateArticleData($data);
-
             if (empty($data['title_error']) && empty($data['body_error']) && empty($data['tags_error'])) {
                 if ($article_id = $this->articleModel->createArticle($data)) {
                     $this->tagsController->mapTags($article_id, $data['tags']);
@@ -67,7 +66,14 @@ class Articles extends Controller
                     die('An error has occurred');
                 }
             } else {
-                $this->view('articles/create', $data);
+                $tags = $this->tagModel->getTagsOfArticle($data['id']);
+                $tagsJSON = [];
+                foreach ($tags as $tag) {
+                    $tagsJSON[] = ['value' => $tag->tag_name];
+                }
+                $tagsJSON = json_encode($tagsJSON);
+                $data['tags'] = $tagsJSON;
+                $this->view('articles/edit', $data);
             }
         } else {
             $article = $this->articleModel->getArticleById($id);
@@ -153,11 +159,13 @@ class Articles extends Controller
             $title = $_POST['title'] ?? '';
             $body = $_POST['body'] ?? '';
             $tags = $_POST['tags'] ?? '';
+            $status = $_POST['status'] ?? '';
         } else {
             $id = '';
             $title = '';
             $body = '';
             $tags = '';
+            $status = '';
         }
 
         return [
@@ -165,10 +173,11 @@ class Articles extends Controller
             'title' => $title,
             'body' => $body,
             'tags' => $tags,
+            'status' => $status,
             'user_id' => $_SESSION['user_id'],
             'title_error' => '',
             'body_error' => '',
-            'tags_error' => ''
+            'tags_error' => '',
         ];
     }
 

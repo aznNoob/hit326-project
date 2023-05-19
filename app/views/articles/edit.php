@@ -35,10 +35,14 @@
                         <?php endif ?>
                     </div>
                     <div class="row">
-                        <div class="col-12 d-flex justify-content-center mt-2">
-                            <input type="submit" value="Submit" class="btn btn-success btn-block">
+                        <div class="col-12 d-flex justify-content-between mt-2">
+                            <button type="submit" name="status" value="draft" class="btn btn-warning btn-block">Save as Draft</button>
+                            <button type="submit" name="status" value="pending_review" class="btn btn-success btn-block">Send for Review</button>
+                            <?php if (!empty($data['status_error'])) : ?><span class="invalid-feedback"><?php echo 'test' ?></span>
+                            <?php endif ?>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>

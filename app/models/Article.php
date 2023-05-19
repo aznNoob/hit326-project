@@ -86,10 +86,11 @@ class Article
 
     public function createArticle($data)
     {
-        $this->db->query('INSERT INTO articles(user_id, title, body) VALUES(:user_id, :title, :body)');
+        $this->db->query('INSERT INTO articles(user_id, title, body, status) VALUES(:user_id, :title, :body, :status)');
         $this->db->bind(':user_id', $data['user_id']);
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':body', $data['body']);
+        $this->db->bind(':status', $data['status']);
         if ($this->db->execute()) {
             return $this->db->lastInsertId();
         } else {
@@ -110,10 +111,11 @@ class Article
 
     public function updateArticle($data)
     {
-        $this->db->query('UPDATE articles SET title = :title, body = :body WHERE id = :id');
+        $this->db->query('UPDATE articles SET title = :title, body = :body, status = :status WHERE id = :id');
         $this->db->bind(':id', $data['id']);
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':body', $data['body']);
+        $this->db->bind(':status', $data['status']);
         if ($this->db->execute()) {
             return true;
         } else {
@@ -121,15 +123,15 @@ class Article
         }
     }
 
-    //     public function setArticleStatus($data)
-    //     {
-    //         $this->db->query('UPDATE articles SET articles.status = :status WHERE articles.id = :id;');
-    //         $this->db->bind(':status', $data['status']);
-    //         $this->db->bind(':id', $data['id']);
-    //         if ($this->db->execute()) {
-    //             return true;
-    //         } else {
-    //             return false;
-    //         }
-    //     }
+    public function setArticleStatus($data)
+    {
+        $this->db->query('UPDATE articles SET articles.status = :status WHERE articles.id = :id;');
+        $this->db->bind(':status', $data['status']);
+        $this->db->bind(':id', $data['id']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
