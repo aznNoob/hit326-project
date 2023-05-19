@@ -29,7 +29,7 @@
                                 </h3>
                             </a>
                             <div class="text-secondary mb-2">
-                                <span>By <?php echo $article->user_name ?></span>
+                                <span>By <?php echo $article->name ?></span>
                                 <span>-</span>
                                 <span><?php echo displayDate(($article->created_at)) ?></span>
                             </div>

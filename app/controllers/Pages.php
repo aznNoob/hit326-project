@@ -13,7 +13,7 @@ class Pages extends Controller
 
     public function index()
     {
-        $topArticles = $this->articleModel->getSixLatestArticles();
+        $topArticles = $this->articleModel->getPublishedArticles(limit: 6);
         foreach ($topArticles as $article) {
             $tags = $this->tagModel->getTagsOfArticle($article->id);
             $article->tags = $tags;

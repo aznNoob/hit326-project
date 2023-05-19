@@ -25,7 +25,7 @@
                             <i class="fa-solid fa-user mx-2"></i><?php echo $_SESSION['user_name'] ?>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#"><i class="fa-solid fa-address-card mx-2"></i>Profile</a>
+                            <p class="dropdown-item"><i class="fa-solid fa-address-card mx-2"></i><?php echo ucfirst($_SESSION['user_role']) ?></p>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="<?php echo URLROOT; ?>/users/logout"><i class="fa-solid fa-right-to-bracket mx-2"></i>Logout</a>
                         </div>
