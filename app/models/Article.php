@@ -31,6 +31,20 @@ class Article
         return $articleResults;
     }
 
+    public function searchArticles($searchTerm)
+    {
+        $likeTerm = "%$searchTerm%";
+        $this->db->query("SELECT articles.*, users.name FROM articles
+                        JOIN users ON articles.user_id = users.id
+                        WHERE articles.status = 'published'
+                        AND (title LIKE :search OR body LIKE :search)
+                        ORDER BY articles.created_at DESC");
+        $this->db->bind(':search', $likeTerm);
+        $searchResults = $this->db->resultSet();
+        return $searchResults;
+    }
+
+
     // Retired method, now replaced by the getArticles method with limit parameter
     // public function getSixLatestArticles()
     // { {

@@ -15,14 +15,26 @@ class Articles extends Controller
 
     public function index()
     {
-        $articles = $this->articleModel->getPublishedArticles();
-        foreach ($articles as $article) {
-            $tags = $this->tagModel->getTagsOfArticle($article->id);
-            $article->tags = $tags;
+        $articles = [];
+
+        if (isset($_GET['search'])) {
+            $articles = $this->articleModel->searchArticles($_GET['search']);
+            foreach ($articles as $article) {
+                $tags = $this->tagModel->getTagsOfArticle($article->id);
+                $article->tags = $tags;
+            }
+        } else {
+            $articles = $this->articleModel->getPublishedArticles();
+            foreach ($articles as $article) {
+                $tags = $this->tagModel->getTagsOfArticle($article->id);
+                $article->tags = $tags;
+            }
         }
+
         $data = [
             'articles' => $articles
         ];
+
         return $this->view('articles/index', $data);
     }
 
@@ -119,6 +131,10 @@ class Articles extends Controller
     {
         $articleAuthor = $this->articleModel->getArticleAuthor($id);
         return userHasRole('editor') || $articleAuthor->id == $_SESSION['user_id'];
+    }
+
+    public function manage()
+    {
     }
 
     public function display($id)

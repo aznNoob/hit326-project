@@ -14,6 +14,16 @@
         <?php endif ?>
     </div>
     <div class="row">
+        <form action="<?php echo URLROOT; ?>/articles" method="GET">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search" name="search">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
         <?php foreach ($data['articles'] as $article) : ?>
             <article class="col-md-6 col-lg-4 mb-4">
                 <div class="card article">
