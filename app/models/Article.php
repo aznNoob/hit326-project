@@ -9,13 +9,28 @@ class Article
         $this->db = new Database;
     }
 
+    public function beginTransaction()
+    {
+        return $this->db->beginTransaction();
+    }
+
+    public function commit()
+    {
+        return $this->db->commit();
+    }
+
+    public function rollback()
+    {
+        return $this->db->rollback();
+    }
+
     public function getPublishedArticles($limit = null)
     {
-        $sql = "SELECT articles.id, articles.title, articles.created_at, articles.body, users.name
+        $sql = "SELECT articles.id, articles.title, articles.created_at, articles.body, articles.status_time, users.name
                 FROM articles
                 JOIN users ON articles.user_id = users.id
                 WHERE articles.status = 'published'
-                ORDER BY articles.created_at DESC";
+                ORDER BY articles.status_time DESC";
 
         if ($limit !== null) {
             $sql .= ' LIMIT :limit';
@@ -31,19 +46,42 @@ class Article
         return $articleResults;
     }
 
-    public function searchArticles($searchTerm)
+    public function searchArticles($search)
     {
-        $likeTerm = "%$searchTerm%";
+        $likeTerm = "%$search%";
         $this->db->query("SELECT articles.*, users.name FROM articles
                         JOIN users ON articles.user_id = users.id
                         WHERE articles.status = 'published'
-                        AND (title LIKE :search OR body LIKE :search)
-                        ORDER BY articles.created_at DESC");
+                        AND (title LIKE :search OR body LIKE :search OR users.name LIKE :search)
+                        ORDER BY articles.status_time DESC");
         $this->db->bind(':search', $likeTerm);
         $searchResults = $this->db->resultSet();
         return $searchResults;
     }
 
+    public function getArticlesByAuthor($id)
+    {
+        $this->db->query("SELECT articles.*, users.name
+                        FROM articles
+                        JOIN users ON articles.user_id = users.id
+                        WHERE articles.user_id = :user_id
+                        ORDER BY articles.status_time DESC");
+        $this->db->bind(':user_id', $id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function getReviewArticles()
+    {
+        $this->db->query("SELECT articles.*, users.name
+                        FROM articles
+                        JOIN users ON articles.user_id = users.id
+                        WHERE articles.status = 'pending_review'
+                        ORDER BY articles.status ASC,
+                        articles.created_at ASC");
+        $results = $this->db->resultSet();
+        return $results;
+    }
 
     // Retired method, now replaced by the getArticles method with limit parameter
     // public function getSixLatestArticles()
@@ -66,7 +104,11 @@ class Article
                         WHERE articles.id = :article_id;');
         $this->db->bind(':article_id', $data);
         $row = $this->db->resultSingle();
-        return $row;
+        if ($row) {
+            return $row;
+        } else {
+            return false;
+        }
     }
 
     public function getArticleAuthor($data)
@@ -100,7 +142,7 @@ class Article
 
     public function createArticle($data)
     {
-        $this->db->query('INSERT INTO articles(user_id, title, body, status) VALUES(:user_id, :title, :body, :status)');
+        $this->db->query('INSERT INTO articles(user_id, title, body, status, status_time) VALUES(:user_id, :title, :body, :status, now())');
         $this->db->bind(':user_id', $data['user_id']);
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':body', $data['body']);
@@ -108,7 +150,7 @@ class Article
         if ($this->db->execute()) {
             return $this->db->lastInsertId();
         } else {
-            return false;
+            throw new PDOException('Failed to create article');
         }
     }
 
@@ -125,7 +167,7 @@ class Article
 
     public function updateArticle($data)
     {
-        $this->db->query('UPDATE articles SET title = :title, body = :body, status = :status WHERE id = :id');
+        $this->db->query('UPDATE articles SET title = :title, body = :body, status = :status, status_time = now() WHERE id = :id');
         $this->db->bind(':id', $data['id']);
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':body', $data['body']);
@@ -133,7 +175,7 @@ class Article
         if ($this->db->execute()) {
             return true;
         } else {
-            return false;
+            throw new PDOException('Failed to update article');
         }
     }
 

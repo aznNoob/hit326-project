@@ -20,7 +20,7 @@
                         <?php if (!empty($data['body_error'])) : ?><span class="invalid-feedback"><?php echo $data['body_error'] ?></span>
                         <?php endif ?>
                     </div>
-                    <div>
+                    <div class="form-group mb-2">
                         <label for="tags" class="form-label">Tags</label>
                         <input id="tags-edit" name="tags" value="" class="form-control <?php echo (!empty($data['tags_error'])) ? 'is-invalid' : ''; ?>">
                         <script>
@@ -34,15 +34,22 @@
                         <?php if (!empty($data['tags_error'])) : ?><span class="invalid-feedback"><?php echo $data['tags_error'] ?></span>
                         <?php endif ?>
                     </div>
-                    <div class="row">
-                        <div class="col-12 d-flex justify-content-between mt-2">
-                            <button type="submit" name="status" value="draft" class="btn btn-warning btn-block">Save as Draft</button>
-                            <button type="submit" name="status" value="pending_review" class="btn btn-success btn-block">Send for Review</button>
-                            <?php if (!empty($data['status_error'])) : ?><span class="invalid-feedback"><?php echo 'test' ?></span>
-                            <?php endif ?>
+                    <?php if (userHasRole('journalist') || userHasRole('editor')) : ?>
+                        <div class="form-group mb-2">
+                            <label for="status_option" class="form-label">Status</label>
+                            <select class="form-select" id="status" name="status">
+                                <option value="draft">Save as Draft</option>
+                                <option value="pending_review">Send for Review</option>
+                                <?php if (userHasRole('editor')) : ?>
+                                    <option value="rejected">Reject</option>
+                                    <option value="published">Publish</option>
+                                <?php endif ?>
+                            </select>
                         </div>
+                    <?php endif ?>
+                    <div class="col-12 d-flex justify-content-center mt-3 ">
+                        <button type="submit" name="submit" class="btn btn-success btn-block">Submit</button>
                     </div>
-
                 </form>
             </div>
         </div>

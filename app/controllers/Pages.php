@@ -30,4 +30,9 @@ class Pages extends Controller
     {
         $this->view('about');
     }
+
+    public function error()
+    {
+        $this->view('error');
+    }
 }

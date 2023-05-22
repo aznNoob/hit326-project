@@ -26,7 +26,7 @@ class Tag
         $this->db->bind(':article_id', $article);
         $this->db->bind(':tag_id', $tag);
         if ($this->db->execute()) {
-            return $this->db->lastInsertId();
+            return true;
         } else {
             return false;
         }
@@ -62,11 +62,16 @@ class Tag
         return $tagResults;
     }
 
-    public function findTagIDByName($data)
+    public function findTagIDByName($tag)
     {
         $this->db->query('SELECT id FROM tags WHERE tag = :tag_name');
-        $this->db->bind(':tag_name', $data);
-        return $this->db->resultSingle();
+        $this->db->bind(':tag_name', $tag);
+        $result = $this->db->resultSingle();
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
     }
 
     public function deleteTagToArticle($data)
@@ -76,7 +81,7 @@ class Tag
         if ($this->db->execute()) {
             return true;
         } else {
-            return false;
+            throw new PDOException('Failed to delete mapping between article and tag');
         }
     }
 }

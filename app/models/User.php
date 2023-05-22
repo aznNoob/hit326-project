@@ -50,4 +50,16 @@ class User
             return false;
         }
     }
+
+    public function appointUserRole($email, $role)
+    {
+        $this->db->query('UPDATE users SET user = :user_role WHERE email = :email');
+        $this->db->bind(':user_role', $role);
+        $this->db->bind(':email', $email);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

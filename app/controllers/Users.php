@@ -15,7 +15,7 @@ class Users extends Controller
     public function register()
     {
         if (checkLoggedIn()) {
-            redirectURL('pages/index');
+            redirectURL('pages/error');
             exit();
         }
 
@@ -28,7 +28,8 @@ class Users extends Controller
                 if ($this->userModel->register($data)) {
                     redirectURL('users/login');
                 } else {
-                    die('An error has occurred.');
+                    redirectURL('pages/error');
+                    exit();
                 }
             }
         } else {
@@ -42,7 +43,7 @@ class Users extends Controller
     public function login()
     {
         if (checkLoggedIn()) {
-            redirectURL('pages/index');
+            redirectURL('pages/error');
             exit();
         }
 
@@ -64,6 +65,12 @@ class Users extends Controller
         } else {
             $data = $this->initLoginData();
             $this->view('users/login', $data);
+        }
+    }
+
+    public function appoint($email)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 

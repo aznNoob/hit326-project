@@ -24,8 +24,15 @@ class Tags extends Controller
     {
         $tagsArray = $this->create($tags);
         foreach ($tagsArray as $tag) {
-            $tag = $this->tagModel->findTagIDByName($tag);
-            $this->tagModel->mapTagToArticle($article, $tag->id);
+            $tagObject = $this->tagModel->findTagIDByName($tag);
+            if (!$tagObject) {
+                throw new Exception("Failed to find tag");
+            }
+
+            $success = $this->tagModel->mapTagToArticle($article, $tagObject->id);
+            if (!$success) {
+                throw new Exception("Failed to map tag to article");
+            }
         }
         return true;
     }

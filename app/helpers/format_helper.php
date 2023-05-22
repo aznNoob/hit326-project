@@ -32,3 +32,19 @@ function displayDate($dateTime)
         return $interval->s . $suffix;
     }
 }
+
+function displayStatus($status)
+{
+    $status = ucfirst($status);
+    if ($status == 'Draft') {
+        return '<span class="text-dark"><i class="fa-solid fa-compass-drafting mx-1"></i></i>Draft</span>';
+    } elseif ($status == 'Pending_review') {
+        return '<span class="text-warning"><i class="fa-regular fa-clock mx-1"></i>Pending Review</span>';
+    } elseif ($status == 'Published') {
+        return '<span class="text-success"><i class="fa-solid fa-check mx-1"></i>Published</span>';
+    } elseif ($status == 'Rejected') {
+        return '<span class="text-danger"><i class="fa-solid fa-xmark mx-1"></i>Rejected</span>';
+    } else {
+        return 'Error!';
+    }
+}

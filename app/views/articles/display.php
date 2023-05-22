@@ -9,7 +9,7 @@
 
         <div class="row mb-2 fst-italic text-secondary">
             <span>By <?php echo $data['article']->author_name ?></span>
-            <span><?php echo date('d F, Y - g.ia', strtotime($data['article']->created_at)) ?></span>
+            <span><?php echo date('d F, Y - g.ia', strtotime($data['article']->status_time)) ?></span>
         </div>
 
         <div class="col-12">
@@ -30,7 +30,6 @@
         </div>
     </div>
 
-
     <?php if (!empty($data['related_articles'])) : ?>
         <hr class="hr">
         </hr>
@@ -40,7 +39,7 @@
 
         <div class="row mb-4">
             <?php foreach ($data['related_articles'] as $related_article) : ?>
-                <div class="col-12 mb-2">
+                <div class="col-10 mb-2">
                     <a href="<?php echo URLROOT; ?>/articles/display/<?php echo $related_article->id ?>">
                         <?php echo $related_article->title ?></span>
                     </a>
@@ -49,16 +48,23 @@
         </div>
     <?php endif ?>
 
-    <?php if (userHasRole('editor') || (isset($_SESSION['user_email']) && $_SESSION['user_email'] == $data['article']->author_email)) : ?>
+    <?php if (userHasRole('editor') || ((userHasRole('journalist') && isset($_SESSION['user_email']) && $_SESSION['user_email'] == $data['article']->author_email))) : ?>
         <hr class="hr">
         </hr>
-        <span class="">
-            <a href="<?php echo URLROOT; ?>/articles/edit/<?php echo $data['article']->id ?>" class="btn btn-warning">Edit</a>
-            <form action="<?php echo URLROOT; ?>/articles/delete/<?php echo $data['article']->id ?>" method="post">
-                <input type="submit" value="Delete" class="btn btn-danger">
-            </form>
-        </span>
+        <div class="row">
+            <h2 class="display-6">Options</h2>
+            <div class="col-10">
+                <div class="form-group d-flex justify-content-start">
+                    <a href=" <?php echo URLROOT; ?>/articles/edit/<?php echo $data['article']->id ?>" class="btn btn-warning">Edit</a>
+                    <form action="<?php echo URLROOT; ?>/articles/delete/<?php echo $data['article']->id ?>" method="post">
+                        <input type="submit" value="Delete" class="btn btn-danger text-black mx-4">
+                    </form>
+                </div>
+            </div>
+        </div>
     <?php endif ?>
+
+
 
 </div>
 

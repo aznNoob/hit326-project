@@ -16,4 +16,8 @@
 </head>
 
 <body>
-    <?php require APPROOT . '/views/includes/navbar.php'; ?>
+    <header>
+        <?php require APPROOT . '/views/includes/navbar.php'; ?>
+    </header>
+
+    <main>

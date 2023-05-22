@@ -43,6 +43,7 @@ class Core
         call_user_func_array([$this->currentController, $this->currentMethod], $this->parameters);
     }
 
+    // Parses the URL
     public function getURL()
     {
         if (isset($_GET['url'])) {

@@ -16,31 +16,35 @@
         <div class="row">
             <h1 class="display-5 fw-bold mb-3">Latest News</h1>
             <div class="row">
-                <?php foreach ($data['articles'] as $article) : ?>
-                    <article class="col-md-6 col-lg-4 mb-5 text-center">
-                        <div class="">
-                            <a href="<?php echo URLROOT; ?>/articles/display/<?php echo $article->id ?>">
-                                <img class="rounded" src="<?php echo URLROOT ?>/img/card-img.svg" alt="Image">
-                            </a>
-
-                            <a class="article-title" href="<?php echo URLROOT; ?>/articles/display/<?php echo $article->id ?>">
-                                <h3 class="mb-2 mt-2">
-                                    <?php echo $article->title ?>
-                                </h3>
-                            </a>
-                            <div class="text-secondary mb-2">
-                                <span>By <?php echo $article->name ?></span>
-                                <span>-</span>
-                                <span><?php echo displayDate(($article->created_at)) ?></span>
-                            </div>
-                            <?php foreach ($article->tags as $tag) : ?>
-                                <a href="#" class="badge bg-secondary mt-1">
-                                    <?php echo $tag->tag_name; ?>
+                <?php if (empty($data['articles'])) : ?>
+                    <p class="fs-4">There are no news articles at the moment.</p>
+                <?php else : ?>
+                    <?php foreach ($data['articles'] as $article) : ?>
+                        <article class="col-md-6 col-lg-4 mb-5 text-center">
+                            <div class="">
+                                <a href="<?php echo URLROOT; ?>/articles/display/<?php echo $article->id ?>">
+                                    <img class="rounded" src="<?php echo URLROOT ?>/img/card-img.svg" alt="Image">
                                 </a>
-                            <?php endforeach; ?>
-                        </div>
-                    </article>
-                <?php endforeach ?>
+
+                                <a class="article-title" href="<?php echo URLROOT; ?>/articles/display/<?php echo $article->id ?>">
+                                    <h3 class="mb-2 mt-2">
+                                        <?php echo $article->title ?>
+                                    </h3>
+                                </a>
+                                <div class="text-secondary mb-2">
+                                    <span>By <?php echo $article->name ?></span>
+                                    <span>-</span>
+                                    <span><?php echo displayDate(($article->created_at)) ?></span>
+                                </div>
+                                <?php foreach ($article->tags as $tag) : ?>
+                                    <a href="#" class="badge bg-secondary mt-1">
+                                        <?php echo $tag->tag_name; ?>
+                                    </a>
+                                <?php endforeach; ?>
+                            </div>
+                        </article>
+                    <?php endforeach ?>
+                <?php endif ?>
             </div>
         </div>
     </div>

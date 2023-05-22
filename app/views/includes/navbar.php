@@ -16,9 +16,11 @@
                 <li class="nav-item mx-2">
                     <a class="nav-link" href="<?php echo URLROOT; ?>/articles/"><i class="fa-solid fa-newspaper mx-2"></i>Articles</a>
                 </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about"><i class="fa-solid fa-circle-info mx-2"></i>About</a>
-                </li>
+                <?php if (userHasRole('editor') || userHasRole('journalist')) : ?>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="<?php echo URLROOT; ?>/articles/manage"><i class="fa-solid fa-list-check mx-2"></i>Manage</a>
+                    </li>
+                <?php endif ?>
                 <?php if (isset($_SESSION['user_id'])) : ?>
                     <li class="nav-item dropdown mx-2">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropDown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,6 +28,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <p class="dropdown-item"><i class="fa-solid fa-address-card mx-2"></i><?php echo ucfirst($_SESSION['user_role']) ?></p>
+
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="<?php echo URLROOT; ?>/users/logout"><i class="fa-solid fa-right-to-bracket mx-2"></i>Logout</a>
                         </div>
