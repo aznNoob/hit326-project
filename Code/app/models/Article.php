@@ -78,7 +78,7 @@ class Article
                         JOIN users ON articles.user_id = users.id
                         WHERE articles.status = 'pending_review'
                         ORDER BY articles.status ASC,
-                        articles.created_at ASC");
+                        articles.created_at DESC");
         $results = $this->db->resultSet();
         return $results;
     }
