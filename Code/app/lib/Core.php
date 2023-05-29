@@ -1,7 +1,7 @@
 <?php
 /* App Core Class
 * Creates URL & loads core Controller
-* URL Format - /controller/method/parameters
+* URL Format - localhost/controller/method/parameters
 */
 
 class Core

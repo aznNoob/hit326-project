@@ -122,7 +122,7 @@ class Users extends Controller
         // Sanitise the POST input
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        // Trim and store sanitized input
+        // Trim and store sanitised input
         $data['name'] = trim($_POST['name']);
         $data['email'] = trim($_POST['email']);
         $data['password'] = $_POST['password'];
