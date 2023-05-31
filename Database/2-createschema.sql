@@ -40,7 +40,7 @@ CREATE TABLE `mapping_articles_tags` (
 
 CREATE TABLE `tags` (
   `id` int(11) NOT NULL,
-  `tag` varchar(255) NOT NULL
+  `tag` varchar(255) NOT NULL UNIQUE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
