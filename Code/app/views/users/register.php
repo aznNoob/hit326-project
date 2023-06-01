@@ -36,14 +36,16 @@
                         <div class="col-12 d-flex justify-content-center mt-2">
                             <input type="submit" value="Submit" class="btn btn-success btn-block">
                         </div>
-                        <div class="col">
-                            <p class="text-center mt-4">Already have an account? <a href="<?php echo URLROOT; ?>/users/login">Login here</a></p>
-                        </div>
                     </div>
                 </form>
+                <div class="col">
+                    <p class="text-center mt-4">Already have an account? <a href="<?php echo URLROOT; ?>/users/login">Login here</a></p>
+                </div>
             </div>
+
         </div>
     </div>
+</div>
 </div>
 
 <?php require APPROOT . '/views/includes/footer.php'; ?>

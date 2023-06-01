@@ -33,6 +33,11 @@ class Core
             if (method_exists($this->currentController, $URL[1])) {
                 $this->currentMethod = $URL[1];
                 unset($URL[1]);
+            } else {
+                // If method doesn't exist, load the Pages controller and the error method
+                require_once '../app/controllers/Pages.php';
+                $this->currentController = new Pages;
+                $this->currentMethod = 'error';
             }
         }
 
