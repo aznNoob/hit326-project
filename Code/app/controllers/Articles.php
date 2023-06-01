@@ -42,25 +42,34 @@ class Articles extends Controller
     }
 
 
-    // Management for journalists (view shows their own articles) and editors (view shows articles that are pending review)
+    // Management for journalists and editors 
     public function manage()
     {
         if ((!userHasRole('journalist')) && (!userHasRole('editor'))) {
             redirectURL('articles/index');
             exit();
         }
+
         if (userHasRole('journalist')) {
             $articles = $this->articleModel->getArticlesByAuthor($_SESSION['user_id']);
         } elseif (userHasRole('editor')) {
-            $articles = $this->articleModel->getReviewArticles();
+            $editorMode = filter_input(INPUT_GET, 'editorMode', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? 'true';
+            if ($editorMode == 'false') {
+                $articles = $this->articleModel->getArticlesByAuthor($_SESSION['user_id']);
+            } else {
+                $articles = $this->articleModel->getReviewArticles();
+            }
         }
+
+
         foreach ($articles as $article) {
             $tags = $this->tagModel->getTagsOfArticle($article->id);
             $article->tags = $tags;
         }
 
         $data = [
-            'articles' => $articles
+            'articles' => $articles,
+            'editorMode' => $editorMode,
         ];
 
         return $this->view('articles/manage', $data);
@@ -107,7 +116,7 @@ class Articles extends Controller
                 $this->view('error');
             }
         } else {
-            $this->view('articles/manage', $data);
+            $this->view('articles/create', $data);
         }
     }
 

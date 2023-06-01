@@ -12,13 +12,26 @@
                 </a>
             </div>
         <?php endif ?>
+        <?php if (userHasRole('editor')) : ?>
+            <div class="mt-1 d-flex justify-content-end">
+                <form action="<?php echo URLROOT; ?>/articles/manage" method="GET">
+                    <input type="hidden" name="editorMode" value="<?php echo ($data['editorMode'] == 'true' ? 'false' : 'true'); ?>">
+                    <button type="submit" class="btn <?php echo ($data['editorMode'] == 'true' ? 'btn-success' : 'btn-danger'); ?>">
+                        Editor Mode
+                    </button>
+                </form>
+            </div>
+        <?php endif ?>
     </div>
+
 
     <div class="row">
         <?php if (userHasRole('journalist') && empty($data['articles'])) : ?>
             <p class="fs-4">You have not created any articles yet.</p>
-        <?php elseif (userHasRole('editor') && empty($data['articles'])) : ?>
+        <?php elseif (userHasRole('editor') && $data['editorMode'] == 'true' && empty($data['articles'])) : ?>
             <p class="fs-4">There are currently no pending review articles.</p>
+        <?php elseif (userHasRole('editor') && $data['editorMode'] != 'true' && empty($data['articles'])) : ?>
+            <p class="fs-4">You have not created any articles yet.</p>
         <?php else : ?>
             <?php foreach ($data['articles'] as $article) : ?>
                 <article class="col-md-6 col-lg-4 mb-4">

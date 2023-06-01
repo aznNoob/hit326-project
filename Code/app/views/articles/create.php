@@ -36,7 +36,6 @@
                                 <option value="draft">Save as Draft</option>
                                 <option value="pending_review">Send for Review</option>
                                 <?php if (userHasRole('editor')) : ?>
-                                    <option value="rejected">Reject</option>
                                     <option value="published">Publish</option>
                                 <?php endif ?>
                             </select>
