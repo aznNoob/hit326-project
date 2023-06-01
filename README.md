@@ -14,6 +14,6 @@ To install the website on a local server the computer must have WAMP installed. 
 Uninstallation:
 To successfully uninstall the website and database, follow the instructions as per below (Refer to the screenshots in Project Report Appendix B for guidance):
 1. Refer to the Database folder of Northern-Australian-Times folder
-2. Go to localhost/phpmyadmin in web browser and import delete SQL file to delete the database
+2. Go to localhost/phpmyadmin in web browser and import deletedb.sql to delete the database
 3. Open both httpd.conf and httpd-vhosts.config files and change document root back to default
 4. Delete Northern-Australian-Times folder
