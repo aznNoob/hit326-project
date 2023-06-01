@@ -50,17 +50,18 @@ class Articles extends Controller
             exit();
         }
 
+        $editorMode = null;
+
         if (userHasRole('journalist')) {
             $articles = $this->articleModel->getArticlesByAuthor($_SESSION['user_id']);
         } elseif (userHasRole('editor')) {
-            $editorMode = filter_input(INPUT_GET, 'editorMode', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? 'true';
-            if ($editorMode == 'false') {
+            $editorMode = filter_input(INPUT_GET, 'editorMode', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if ($editorMode === null || $editorMode == 'false') {
                 $articles = $this->articleModel->getArticlesByAuthor($_SESSION['user_id']);
             } else {
                 $articles = $this->articleModel->getReviewArticles();
             }
         }
-
 
         foreach ($articles as $article) {
             $tags = $this->tagModel->getTagsOfArticle($article->id);
